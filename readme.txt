@@ -1,3 +1,12 @@
+
+touch README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin git@github.com:alexpchin/<reponame>.git
+git push -u origin master
+
+
 #) create requirements using
 pip list --format=freeze > requirements.txt   
 
@@ -48,5 +57,7 @@ https://cloud.google.com/container-registry/pricing
 https://cloud.google.com/artifact-registry/pricing
 https://cloud.google.com/python/docs/reference
 https://cloud.google.com/python
+
+https://mothishdeenadayalan.medium.com/containerizing-a-python-app-mysql-python-docker-1ce64e444ed9
 
 
