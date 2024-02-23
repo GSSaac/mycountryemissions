@@ -1,0 +1,239 @@
+<!-- # Author: 
+# --- Giuseppina Schiavone
+# Organization: 
+# --- Sustainability Advanced Analytics Consultancy
+# Date: 
+# --- February 2024
+# Project:
+# ---
+#   Build and Deploy A Python Web App In One Evening
+#   Online Working Session
+#   26th February 2024, 6:00-8:00 PM, CET
+
+# Description of this file:
+# ---this is the main html file of the application called by the main.py
+
+# Datasource:
+# ---
+# Global Carbon Budget (2023) – with major processing by Our World in Data. “Annual CO₂ emissions – GCB” [dataset]. 
+# Global Carbon Project, “Global Carbon Budget” [original data].
+# https://ourworldindata.org/co2-emissions -->
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Page Layout</title>
+	<style>
+        * {
+        box-sizing: border-box;
+        }
+		.head1 {
+			font-size: 40px;
+            margin-left: 50px;
+            margin-top: 10px;
+			color: white;
+			font-weight: bold;
+            text-align: center;
+		}
+
+        .head2 {
+			font-size: 12px;
+			margin-top: 0px;
+			margin-left: 50px;
+			margin-bottom: 10px;
+            text-align: center;
+            color: black;
+    
+		}
+
+		body {
+			margin: 0 auto;
+			background-position: center;
+			background-size: contain;
+		}
+
+		.menu {
+			position: sticky;
+			top: 0;
+			background-color: #00b285;
+			padding: 0px 0px 0px 0px;
+			color: white;
+			margin: 0 auto;
+			overflow: hidden;
+		}
+
+		.menu form {
+			float: center;
+			color: white;
+			text-align: center;
+			padding: 10px 12px;
+			text-decoration: none;
+			font-size: 12px;
+            font-weight: bold;
+			
+		}
+
+      
+
+        .menu form select{
+			
+			color: black;
+			text-align: center;
+			padding: 0px 12px;
+			text-decoration: none;
+			font-size: 16px;
+            width:200px;
+			
+		}
+
+        .menu form button{
+			margin-top: 5px;
+			text-align: center;
+			padding: 0px 12px;
+			text-decoration: none;
+			font-size: 16px;
+			
+		}
+
+        .hidden-text{
+            margin-top: 0px;
+			text-align: center;
+			padding: 12px 14px;
+			text-decoration: none;
+			font-size: 16px;
+            color: black;
+
+        }
+
+		.footer-text {
+			right: auto;
+			float: left;
+            margin-left: 50px;
+            padding-top: 50px;
+            font-size: 12px;
+            color: white;
+		}
+
+        .footer-logo {
+			right: auto;
+			float: right;
+            margin-right: 50px;
+            font-size: 14px;
+		}
+
+        h3 {
+            text-align: center;
+        }
+
+		footer {
+			width: 100%;
+			bottom: 0px;
+            left: 0px;
+			background-color: #000;
+			color: #fff;
+			position: sticky;
+			padding-top: 0px;
+			padding-bottom: 0px;
+            margin-top: auto;
+            
+		}
+
+		.body_sec {
+
+            display: flex;
+            flex-direction: column;
+            
+		}
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+            }
+
+        /* Create two equal columns that sits next to each other */
+        .column {
+            float: left;
+            width: 50%;
+            padding-left:50px;
+            padding-right:50px;
+        
+        }
+
+
+	</style>
+</head>
+
+<body>
+<main>
+    
+    <!-- Header section -->
+
+	<nav class="menu">
+        
+        <div class="head1">
+            MY COUNTRY's EMISSIONS
+        </div>
+        <div class="head2">
+            Source:
+            <a href="https://ourworldindata.org/co2-emissions">
+             Global Carbon Budget (2023) 
+            </a>
+        
+        </div>
+        
+        <form class='centeredPrompt_item' action='/getmycountry/' id="myForm">
+            
+            <label for="countries">SELECT COUNTRY</label>
+            <br>
+            <select name="my_country" id="myCountrySelect">
+                {% for type in countries_list %}
+                {% if type == my_country %}
+                <option value={{type}} selected>{{type}}</option>
+                {% else %}
+                <option>{{type}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+          <!-- <button type="submit">Submit</button> -->
+          </form>
+
+          <script>
+            document.getElementById("myCountrySelect").addEventListener("change", function() {
+                document.getElementById("myForm").submit();
+            });
+        </script>
+	</nav>
+    
+    {{ script | safe }} {# Use the | safe filter to render the script as HTML #}
+   
+   
+    <!-- Body section -->
+
+
+    <main class="body_sec">
+
+                {% if empty_db %}
+                    <p>No data to plot.</p>
+                {% elif plot_html %}
+                    {{ plot_html|safe }}
+                {% endif %}
+
+    </main>
+</main>
+
+	<!-- Footer Section -->
+    
+{% include "footer.html" %}
+</body>
+</html>

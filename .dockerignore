@@ -1,0 +1,9 @@
+# ignore foldre that should not in the container
+
+__pycach__
+.git
+.Python
+.ipynb_checkpoints
+*.pyo
+*.pyd
+*.pyc 
