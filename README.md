@@ -95,9 +95,7 @@ http://localhost:9090/
 
 
 # 15) additional verification if something is not working:
-make sure you have installed in your google cloud project the following APIs:
-->Artifact Registry API		
-->Cloud Run Admin API
+make sure you have installed in your google cloud project the following APIs: Artifact Registry API, Cloud Run Admin API
 
 This you can check if from the google cloud console dashboard of your project
 
